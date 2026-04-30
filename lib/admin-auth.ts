@@ -20,5 +20,5 @@ export async function verifyAdminCredentials(emailRaw: string, passwordRaw: stri
     "select id from users where lower(email)=lower($1) and role='admin' and password_hash=$2 limit 1",
     [email, hash]
   );
-  return result.rowCount > 0;
+  return (result.rowCount ?? 0) > 0;
 }
