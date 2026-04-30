@@ -25,6 +25,7 @@ Next.js App Router dashboard for centrally managing connected Optimization Genie
 - Signed admin session cookie auth
 - Vercel cron endpoints for maintenance and license expiry checks
 - Plugin check-in status route (`POST /api/sites/status`)
+- Seeded admin account (app-level DB): `haseeb.dlp@gmail.com`
 
 ## Security Notes
 - Each site has `installId` and hashed secret storage.
