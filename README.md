@@ -12,7 +12,8 @@ Next.js App Router dashboard for centrally managing connected Optimization Genie
 1. `npm install`
 2. Copy `.env.example` to `.env.local`
 3. Set `DATABASE_URL` (Supabase Postgres connection string)
-4. `npm run dev`
+4. Keep `LOCAL_MODE=true` for no-login local dashboard mode
+5. `npm run dev`
 
 ## MVP Features
 - Website registration: `POST /api/sites/register`
@@ -26,6 +27,8 @@ Next.js App Router dashboard for centrally managing connected Optimization Genie
 - Vercel cron endpoints for maintenance and license expiry checks
 - Plugin check-in status route (`POST /api/sites/status`)
 - DB-backed admin account seeded via migration: `haseeb.dlp@gmail.com`
+- Local mode bypasses dashboard login and admin-cookie checks for faster internal use.
+- Dashboard site cards auto-refresh every ~8 seconds from `/api/sites`.
 
 ## Security Notes
 - Each site has `installId` and hashed secret storage.

@@ -3,13 +3,31 @@
 import { useMemo, useState } from "react";
 import { SiteCard } from "@/components/dashboard/SiteCard";
 import type { Site } from "@/lib/types";
+import { useEffect } from "react";
 
 export function ClientDashboard({ initialSites }: { initialSites: Site[] }) {
   const [q, setQ] = useState("");
   const [status, setStatus] = useState("all");
+  const [liveSites, setLiveSites] = useState<Site[]>(initialSites);
+
+  useEffect(() => {
+    let mounted = true;
+    const tick = async () => {
+      const res = await fetch("/api/sites", { cache: "no-store" });
+      if (!res.ok) return;
+      const data = (await res.json()) as { sites: Site[] };
+      if (mounted) setLiveSites(data.sites);
+    };
+    tick();
+    const id = setInterval(tick, 8000);
+    return () => {
+      mounted = false;
+      clearInterval(id);
+    };
+  }, []);
 
   const sites = useMemo(() => {
-    return initialSites.filter((site) => {
+    return liveSites.filter((site) => {
       const matchesQ =
         !q ||
         site.clientName.toLowerCase().includes(q.toLowerCase()) ||
@@ -17,7 +35,7 @@ export function ClientDashboard({ initialSites }: { initialSites: Site[] }) {
       const matchesStatus = status === "all" || site.licenseStatus === status;
       return matchesQ && matchesStatus;
     });
-  }, [initialSites, q, status]);
+  }, [liveSites, q, status]);
 
   return (
     <>

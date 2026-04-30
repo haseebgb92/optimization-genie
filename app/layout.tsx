@@ -2,7 +2,6 @@ import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { LogoutButton } from "@/components/dashboard/LogoutButton";
 
 export const metadata = {
   title: "Optimization Genie Cloud"
@@ -23,9 +22,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 Websites
               </Link>
             </nav>
-            <div className="mt-6">
-              <LogoutButton />
-            </div>
           </aside>
           <main className="p-4 md:p-8">{children}</main>
         </div>
