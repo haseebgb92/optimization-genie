@@ -11,7 +11,7 @@ Next.js App Router dashboard for centrally managing connected Optimization Genie
 ## Setup
 1. `npm install`
 2. Copy `.env.example` to `.env.local`
-3. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD`
+3. Set `DATABASE_URL` (Supabase Postgres connection string)
 4. `npm run dev`
 
 ## MVP Features
@@ -25,7 +25,7 @@ Next.js App Router dashboard for centrally managing connected Optimization Genie
 - Signed admin session cookie auth
 - Vercel cron endpoints for maintenance and license expiry checks
 - Plugin check-in status route (`POST /api/sites/status`)
-- Seeded admin account (app-level DB): `haseeb.dlp@gmail.com`
+- DB-backed admin account seeded via migration: `haseeb.dlp@gmail.com`
 
 ## Security Notes
 - Each site has `installId` and hashed secret storage.
